@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const cookieParser = require('cookie-parser');
+const authRoutes = require('./routes/auth.routes');
 
 const app = express();
 
@@ -15,6 +17,8 @@ app.use(
   })
 );
 
+app.use(cookieParser());
+
 // Parse JSON request bodies (limit payload size to 10kb)
 app.use(express.json({ limit: '10kb' }));
 
@@ -26,6 +30,8 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+app.use('/api/auth', authRoutes);
 
 // Handle 404 for undefined routes
 app.use((req, res) => {
