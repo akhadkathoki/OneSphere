@@ -16,7 +16,7 @@
       "source": "/api/(.*)",
       "destination": {
         "service": "server"
-      }      
+      }
     },
     {
       "source": "/(.*)",
