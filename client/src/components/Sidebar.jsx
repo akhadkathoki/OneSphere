@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 
 const logo = {
-  dark: "/public/dark_logo.png",
-  light: "/public/light_logo.png",
+  dark: "/dark_logo.png",
+  light: "/light_logo.png",
 };
 
 const navigation = [

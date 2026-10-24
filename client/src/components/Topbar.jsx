@@ -1,9 +1,21 @@
 
-import { Bell, Search, Plus, Menu } from 'lucide-react';
+import { Bell, Search, Plus, Menu, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function Topbar({ onMenuClick }) {
   const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  async function handleLogout() {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    } finally {
+      navigate('/login', { replace: true });
+    }
+  }
 
   return (
     <header className="flex min-h-20 items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 sm:px-8">
@@ -48,6 +60,17 @@ function Topbar({ onMenuClick }) {
           className="relative rounded-xl p-2.5 text-slate-600 hover:bg-slate-100"
         >
           <Bell size={20} />
+        </button>
+
+        <button
+          type="button"
+          onClick={handleLogout}
+          aria-label="Log out"
+          title="Log out"
+          className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-red-50 hover:text-red-600"
+        >
+          <LogOut size={19} />
+          <span className="hidden md:inline">Log out</span>
         </button>
 
         <div
